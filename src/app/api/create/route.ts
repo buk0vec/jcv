@@ -8,11 +8,10 @@ export async function POST(request: Request) {
   const json = await request.json();
   const { name, resume } = json;
   if (!name || !resume) {
-    return new Response(JSON.stringify({ message: "Missing name or resume" }), {
+    return new Response(JSON.stringify({ message: "Missing name or JSON" }), {
       status: 400,
     });
   }
-  console.log(name, resume);
   try {
     const n = usernameSchema.parse(name);
     const r = schema.parse(resume);

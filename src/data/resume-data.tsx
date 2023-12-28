@@ -19,7 +19,7 @@ import { GitHubIcon } from "../components/icons/GitHubIcon";
 import { LinkedInIcon } from "../components/icons/LinkedInIcon";
 import { XIcon } from "../components/icons/XIcon";
 
-export const RESUME_DATA = {
+export const _DATA = {
   name: "Bartosz Jarocki",
   initials: "BJ",
   location: "Wrocław, Poland, CET",

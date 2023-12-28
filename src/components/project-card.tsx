@@ -6,9 +6,9 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { Resume } from "@/lib/schema";
+import type { Resume } from "@/lib/schema";
 
-type Props = Resume["projects"][number];
+type Props = NonNullable<Resume["projects"]>[number];
 
 /* TODO: Add highlights? Probably make a setting later to toggle this */
 /* TODO: Same with dates */

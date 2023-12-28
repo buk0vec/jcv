@@ -10,7 +10,9 @@ import { z } from "zod"
 
     Todo:
     - Try to only make the real required things required and everything else optional.
-
+    - Add proper validation for start dates and optional end dates 
+      (ex. current position, projects with only one month, projects w/ only end dates).
+    - More flexible date parsing.
 */
 
 export const usernameSchema = z.string().min(3).regex(/^[a-z0-9\-\_]+$/i, "Username can only contain letters, numbers, dashes, and underscores.");
@@ -107,8 +109,8 @@ export const schema = z.object({
   skills: z.array(
     z.object({
       name: z.string(),
-      level: z.string(),
-      keywords: z.array(z.string())
+      level: z.string().optional(),
+      keywords: z.array(z.string()).optional()
     })
   ).optional(),
   languages: z.array(z.object({ language: z.string(), fluency: z.string() })).optional(),

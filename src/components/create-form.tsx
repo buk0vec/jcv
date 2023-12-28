@@ -107,14 +107,14 @@ export const CreateForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="flex flex-col">
         <Label htmlFor="url">
           Handle{" "}
           <Input
             id="url"
             type="text"
             placeholder="john-doe"
+            className="mt-1"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
@@ -123,15 +123,15 @@ export const CreateForm = () => {
           JSON{" "}
           <Textarea
             id="json"
+            className="mt-1"
             value={resume}
             onChange={(e) => setResume(e.target.value)}
+            placeholder="{...}"
           />
         </Label>
-        <Button className="mt-2" type="submit" disabled={loading}>
+        <Button className="mt-2 mx-auto" type="submit" disabled={loading}>
           Generate
         </Button>
       </form>
-      <pre>{resume}</pre>
-    </div>
   );
 };
