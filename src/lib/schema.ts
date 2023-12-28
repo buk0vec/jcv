@@ -12,6 +12,9 @@ import { z } from "zod"
     - Try to only make the real required things required and everything else optional.
 
 */
+
+export const usernameSchema = z.string().min(3).regex(/^[a-z0-9\-\_]+$/i, "Username can only contain letters, numbers, dashes, and underscores.");
+
 export const schema = z.object({
   meta: z.object({
     canonical: z.string().optional(),

@@ -43,7 +43,7 @@ interface PageProps { params: { slug: string } };
 
 export default async function Page({ params }: PageProps) {
   try {
-    const data = await redis.get(params.slug);
+    const data = await redis.get("cv:" + params.slug);
     const PARSED_DATA = schema.parse(data);
     return (
       <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
@@ -491,7 +491,7 @@ export async function generateMetadata(
   const slug = params.slug;
 
   try {
-    const data = await redis.get(slug);
+    const data = await redis.get("cv:" + slug);
     const PARSED_DATA = schema.parse(data);
     return {
       title: `${PARSED_DATA.basics.name} | ${PARSED_DATA.basics.label}`,
