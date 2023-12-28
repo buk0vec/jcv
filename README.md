@@ -1,10 +1,14 @@
-![cv](https://github.com/BartoszJarocki/cv/assets/1017620/79bdb9fc-0b20-4d2c-aafe-0526ad4a71d2)
+# jcv
 
-# Minimalist CV
+Web app to render a CV from a JSONResume file.
 
-Simple web app that renders minimalist CV with print-friendly layout.
+Built with Next.js and shadcn/ui, data stored on Upstash, deployed on Vercel.
 
-Built with Next.js and shadcn/ui, deployed on Vercel.
+Heavily inspired by [Bartosz Jarocki's cv](https://github.com/BartoszJarocki/cv).
+
+# TODO
+
+- Working on PDF -> JSONResume converter ;)
 
 # License
 
