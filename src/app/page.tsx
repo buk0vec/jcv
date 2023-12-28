@@ -14,7 +14,7 @@ export default function Page() {
     <>
       <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
         <section className="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
-          <h1 className="text-center text-4xl font-bold">jcv</h1>
+          <h1 className="text-center text-4xl font-bold">jcv 📃</h1>
           <p className="text-center">
             Create a&nbsp;
             <a href="/thomas-davis" className="underline hover:opacity-80">
