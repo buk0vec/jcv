@@ -1,3 +1,5 @@
+https://github.com/buk0vec/cv/assets/39397198/c2eceb4d-17ce-49ba-950a-64db079fa072
+
 # jcv
 
 Web app to render a CV from a JSONResume file.
