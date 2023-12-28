@@ -28,23 +28,23 @@ export const schema = z.object({
   basics: z.object({
     name: z.string(),
     label: z.string(),
-    image: z.string(),
+    image: z.string().optional(),
     email: z.string().email(),
     phone: z.string().optional(),
     url: z.string().optional(),
     initials: z.string().optional(),
-    summary: z.string(),
+    summary: z.string().optional(),
     location: z.object({
       address: z.string().optional(),
       postalCode: z.string().optional(),
-      city: z.string(),
-      countryCode: z.string(),
+      city: z.string().optional(),
+      countryCode: z.string().optional(),
       region: z.string().optional(),
       url: z.string().url().optional()
-    }),
+    }).optional(),
     profiles: z.array(
       z.object({ network: z.string(), username: z.string().optional(), url: z.string() })
-    )
+    ).optional(),
   }),
   work: z.array(
     z.object({
@@ -113,7 +113,7 @@ export const schema = z.object({
       keywords: z.array(z.string()).optional()
     })
   ).optional(),
-  languages: z.array(z.object({ language: z.string(), fluency: z.string() })).optional(),
+  languages: z.array(z.object({ language: z.string(), fluency: z.string().optional() })).optional(),
   interests: z.array(
     z.object({ name: z.string(), keywords: z.array(z.string()).optional() })
   ).optional(),

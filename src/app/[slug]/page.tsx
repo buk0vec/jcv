@@ -8,7 +8,7 @@ import { GlobeIcon, MailIcon, PhoneIcon, Link } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/project-card";
 import { schema } from "@/lib/schema";
-import { formatLocation, getInitials, yyyy } from "@/lib/fmt";
+import { dateRange, formatLocation, getInitials, yyyy } from "@/lib/fmt";
 import { GitHubIcon } from "@/components/icons/GitHubIcon";
 import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 import { XIcon } from "@/components/icons/XIcon";
@@ -37,7 +37,9 @@ const determineIcon = (name: string) => {
   return <Link className="h-4 w-4" />;
 };
 
-interface PageProps { params: { slug: string } };
+interface PageProps {
+  params: { slug: string };
+}
 
 /* TODO: Make sure to not include sections that don't have any data */
 
@@ -51,26 +53,30 @@ export default async function Page({ params }: PageProps) {
           <div className="flex items-center justify-between">
             <div className="flex-1 space-y-1.5">
               <h1 className="text-2xl font-bold">{PARSED_DATA.basics.name}</h1>
-              <p className="max-w-md text-pretty font-mono text-sm text-muted-foreground">
-                {PARSED_DATA.basics.label}
-              </p>
-              <p className="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground">
-                {PARSED_DATA.basics.location.url ? (
-                  <a
-                    className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
-                    href={PARSED_DATA.basics.location.url}
-                    target="_blank"
-                  >
-                    <GlobeIcon className="h-3 w-3" />
-                    {formatLocation(PARSED_DATA.basics.location)}
-                  </a>
-                ) : (
-                  <span className="inline-flex gap-x-1.5 align-baseline leading-none">
-                    <GlobeIcon className="h-3 w-3" />
-                    {formatLocation(PARSED_DATA.basics.location)}
-                  </span>
-                )}
-              </p>
+              {PARSED_DATA.basics.label && (
+                <p className="max-w-md text-pretty font-mono text-sm text-muted-foreground">
+                  {PARSED_DATA.basics.label}
+                </p>
+              )}
+              {PARSED_DATA.basics.location && (
+                <p className="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground">
+                  {PARSED_DATA.basics.location.url ? (
+                    <a
+                      className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
+                      href={PARSED_DATA.basics.location.url}
+                      target="_blank"
+                    >
+                      <GlobeIcon className="h-3 w-3" />
+                      {formatLocation(PARSED_DATA.basics.location)}
+                    </a>
+                  ) : (
+                    <span className="inline-flex gap-x-1.5 align-baseline leading-none">
+                      <GlobeIcon className="h-3 w-3" />
+                      {formatLocation(PARSED_DATA.basics.location)}
+                    </span>
+                  )}
+                </p>
+              )}
               <div className="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden">
                 {PARSED_DATA.basics.email ? (
                   <Button
@@ -96,7 +102,7 @@ export default async function Page({ params }: PageProps) {
                     </a>
                   </Button>
                 ) : null}
-                {PARSED_DATA.basics.profiles.map((social) => (
+                {(PARSED_DATA.basics.profiles ?? []).map((social) => (
                   <Button
                     key={social.network}
                     className="h-8 w-8"
@@ -137,12 +143,14 @@ export default async function Page({ params }: PageProps) {
               </AvatarFallback>
             </Avatar>
           </div>
-          <Section>
-            <h2 className="text-xl font-bold">About</h2>
-            <p className="text-pretty font-mono text-sm text-muted-foreground">
-              {PARSED_DATA.basics.summary}
-            </p>
-          </Section>
+          {PARSED_DATA.basics.summary && (
+            <Section>
+              <h2 className="text-xl font-bold">About</h2>
+              <p className="text-pretty font-mono text-sm text-muted-foreground">
+                {PARSED_DATA.basics.summary}
+              </p>
+            </Section>
+          )}
           <Section>
             <h2 className="text-xl font-bold">Work Experience</h2>
             {PARSED_DATA.work.map((work) => {
@@ -166,11 +174,9 @@ export default async function Page({ params }: PageProps) {
                           ))}
                         </span>
                       </h3>
-                      {work.startDate && work.endDate && (
-                        <div className="text-sm tabular-nums text-gray-500">
-                          {yyyy(work.startDate)} - {yyyy(work.endDate)}
-                        </div>
-                      )}
+                      <div className="text-sm tabular-nums text-gray-500">
+                        {dateRange(work.startDate, work.endDate)}
+                      </div>
                     </div>
 
                     <h4 className="font-mono text-sm leading-none">
@@ -203,8 +209,7 @@ export default async function Page({ params }: PageProps) {
                           {education.institution}
                         </h3>
                         <div className="text-sm tabular-nums text-gray-500">
-                          {yyyy(education.startDate)} -{" "}
-                          {yyyy(education.endDate)}
+                          {dateRange(education.startDate, education.endDate)}
                         </div>
                       </div>
                     </CardHeader>
@@ -300,8 +305,7 @@ export default async function Page({ params }: PageProps) {
                           </a>
                         </h3>
                         <div className="text-sm tabular-nums text-gray-500">
-                          {yyyy(volunteer.startDate)} -{" "}
-                          {yyyy(volunteer.endDate)}
+                          {dateRange(volunteer.startDate, volunteer.endDate)}
                         </div>
                       </div>
 
@@ -470,7 +474,7 @@ export default async function Page({ params }: PageProps) {
               url,
               title: "Website",
             })),
-            ...PARSED_DATA.basics.profiles.map((socialMediaLink) => ({
+            ...(PARSED_DATA.basics.profiles ?? []).map((socialMediaLink) => ({
               url: socialMediaLink.url,
               title: socialMediaLink.network,
             })),
