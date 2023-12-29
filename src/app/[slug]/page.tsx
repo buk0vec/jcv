@@ -85,7 +85,10 @@ export default async function Page({ params }: PageProps) {
                     size="icon"
                     asChild
                   >
-                    <a href={`mailto:${PARSED_DATA.basics.email}`} aria-label={`Email ${PARSED_DATA.basics.email}`}>
+                    <a
+                      href={`mailto:${PARSED_DATA.basics.email}`}
+                      aria-label={`Email ${PARSED_DATA.basics.email}`}
+                    >
                       <MailIcon className="h-4 w-4" />
                     </a>
                   </Button>
@@ -97,7 +100,10 @@ export default async function Page({ params }: PageProps) {
                     size="icon"
                     asChild
                   >
-                    <a href={`tel:${PARSED_DATA.basics.phone}`} aria-label={`Call ${PARSED_DATA.basics.phone}`}>
+                    <a
+                      href={`tel:${PARSED_DATA.basics.phone}`}
+                      aria-label={`Call ${PARSED_DATA.basics.phone}`}
+                    >
                       <PhoneIcon className="h-4 w-4" />
                     </a>
                   </Button>
@@ -110,7 +116,12 @@ export default async function Page({ params }: PageProps) {
                     size="icon"
                     asChild
                   >
-                    <a href={social.url} aria-label={`Go to ${social.network} profile`}>{determineIcon(social.network)}</a>
+                    <a
+                      href={social.url}
+                      aria-label={`Go to ${social.network} profile`}
+                    >
+                      {determineIcon(social.network)}
+                    </a>
                   </Button>
                 ))}
               </div>
@@ -248,7 +259,9 @@ export default async function Page({ params }: PageProps) {
                 {PARSED_DATA.skills.flatMap((skill) => {
                   return skill.keywords ? (
                     [
-                      <Badge key={skill.name}>{skill.name}</Badge>,
+                      <Badge key={skill.name} className="align-middle text-xs">
+                        {skill.name}
+                      </Badge>,
                       ...skill.keywords.map((keyword) => (
                         <Badge
                           variant="secondary"
@@ -260,11 +273,7 @@ export default async function Page({ params }: PageProps) {
                       )),
                     ]
                   ) : (
-                    <Badge
-                      variant="secondary"
-                      className="align-middle text-xs"
-                      key={skill.name}
-                    >
+                    <Badge className="align-middle text-xs" key={skill.name}>
                       {skill.name}
                     </Badge>
                   );
