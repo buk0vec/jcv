@@ -27,6 +27,7 @@ export const {
     }),
   ],
   theme: {
-    logo: "/jcv-logo.png"
+    logo: "/jcv-logo.png",
+    colorScheme: "light",
   }
 });

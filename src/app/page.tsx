@@ -49,6 +49,7 @@ export default async function Page() {
             buk0vec
           </a>
         </p>
+        <p className="text-center">View our <a href="/privacy" className="underline hover:opacity-80">privacy policy</a></p>
       </footer>
     </>
   );

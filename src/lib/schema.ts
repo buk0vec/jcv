@@ -15,7 +15,7 @@ import { z } from "zod";
     - More flexible date parsing.
 */
 
-const reservedPaths = ["api"];
+const reservedPaths = ["api", "privacy"];
 
 export const usernameSchema = z
   .string()
