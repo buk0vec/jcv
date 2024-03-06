@@ -14,6 +14,8 @@ import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 import { XIcon } from "@/components/icons/XIcon";
 import { Redis } from "@upstash/redis";
 import { notFound } from "next/navigation";
+import { getCommandBarProps } from "@/components/auth-components";
+import { signIn, signOut } from "../../../auth";
 
 const redis = Redis.fromEnv();
 
@@ -47,6 +49,7 @@ export default async function Page({ params }: PageProps) {
   try {
     const data = await redis.get("cv:" + params.slug);
     const PARSED_DATA = schema.parse(data);
+    const cmdProps = await getCommandBarProps(params.slug);
     return (
       <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
         <section className="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
@@ -488,6 +491,8 @@ export default async function Page({ params }: PageProps) {
               title: socialMediaLink.network,
             })),
           ]}
+          slug={params.slug}
+          {...cmdProps}
         />
       </main>
     );
