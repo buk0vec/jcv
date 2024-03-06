@@ -13,11 +13,18 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 
+import { signIn, signOut } from "next-auth/react"
+import { sign } from "crypto";
+
+
 interface Props {
   links: { url: string; title: string }[];
+  editable: boolean;
+  authenticated: boolean;
+  slug: string;
 }
 
-export const CommandMenu = ({ links }: Props) => {
+export const CommandMenu = ({ links, editable, authenticated, slug }: Props) => {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -39,13 +46,14 @@ export const CommandMenu = ({ links }: Props) => {
         <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
           <span className="text-xs">⌘</span>J
         </kbd>{" "}
-        to open the command menu. Hosted by <a href="/" className="underline hover:opacity-80">jcv</a>.
+        to open the command menu{editable ? " and to edit" : ""}. Hosted by <a href="/" className="underline hover:opacity-80">jcv</a>.
       </p>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Actions">
+            {editable && <CommandItem onSelect={() => window.location.href = `/${slug}/edit`}><span>Edit CV</span></CommandItem>}
             <CommandItem
               onSelect={() => {
                 setOpen(false);
@@ -54,6 +62,14 @@ export const CommandMenu = ({ links }: Props) => {
             >
               <span>Print</span>
             </CommandItem>
+            {authenticated && <CommandItem onSelect={() => {
+              setOpen(false);
+              signOut()
+            }}><span>Sign Out</span></CommandItem>}
+            {!authenticated && <CommandItem onSelect={() =>  {
+              setOpen(false);
+              signIn()
+            }}><span>Sign In</span></CommandItem>}
           </CommandGroup>
           <CommandGroup heading="Links">
             {links.map(({ url, title }) => (

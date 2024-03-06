@@ -8,6 +8,7 @@ import { ZodError, z } from "zod";
 import { schema, usernameSchema } from "@/lib/schema";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
+import { template } from "@/lib/template";
 
 export const CreateForm = () => {
   const [url, setUrl] = useState("");
@@ -129,9 +130,15 @@ export const CreateForm = () => {
             placeholder="{...}"
           />
         </Label>
+        <div className="flex flex-row items-baseline mt-4">
         <Button className="mt-2 mx-auto" type="submit" disabled={loading}>
           Generate
         </Button>
+         or 
+        <Button className="mt-2 mx-auto" disabled={loading} type="button" onClick={() => setResume(JSON.stringify(template, null, "\t"))}>
+          Use the template
+        </Button>
+        </div>
       </form>
   );
 };
