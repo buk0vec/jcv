@@ -1,4 +1,4 @@
-import { Metadata } from "next/types";
+import type { Metadata } from "next";
 
 export default function PrivacyPage() {
   return (
