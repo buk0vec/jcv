@@ -117,3 +117,9 @@ export default function PrivacyPage() {
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: `Privacy Policy | jcv`,
+  description:
+    "A JSONResume CV generator using Next.js, Tailwind CSS, shadcn/ui",
+};
