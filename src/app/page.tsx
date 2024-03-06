@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 /* TODO: Make sure to not include sections that don't have any data */
 export default async function Page() {
   const data = await auth();
-  console.log(data?.user)
   return (
     <>
       <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
