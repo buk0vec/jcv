@@ -135,7 +135,7 @@ export const CreateForm = () => {
           Generate
         </Button>
          or 
-        <Button className="mt-2 mx-auto" disabled={loading} type="button" onClick={() => setResume(JSON.stringify(template, 0, "\t"))}>
+        <Button className="mt-2 mx-auto" disabled={loading} type="button" onClick={() => setResume(JSON.stringify(template, null, "\t"))}>
           Use the template
         </Button>
         </div>

@@ -8,6 +8,7 @@ import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DRIZZLE_DATABASE_URL!);
+//@ts-expect-error 
 const db = drizzle(sql);
 
 const redis = Redis.fromEnv();
